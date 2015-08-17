@@ -240,6 +240,15 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             mockCell = [[UIImageView alloc] initWithFrame:cell.frame];
             mockCell.image = [self imageFromCell:cell];
             mockCenter = mockCell.center;
+            
+            // Add drop shadow
+            mockCell.layer.shadowColor = [UIColor colorWithWhite:0.f alpha:0.35f].CGColor;
+            mockCell.layer.shadowOffset = CGSizeMake(0.0, -3.0);
+            mockCell.layer.shadowRadius = 4.0;
+            mockCell.layer.shadowOpacity = 1.0;
+            mockCell.layer.masksToBounds = NO;
+            mockCell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:mockCell.bounds cornerRadius:2.0f].CGPath;
+            
             [self.collectionView addSubview:mockCell];
 			if ([self.collectionView.dataSource respondsToSelector:@selector(collectionView:transformForDraggingItemAtIndexPath:duration:)]) {
 				NSTimeInterval duration = 0.3;
